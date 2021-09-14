@@ -7,7 +7,7 @@ def new_game():
         for i in options:
             print(i)
         choice = input("Enter (A, B, C, D): ")
-        choice.upper()
+        choice = choice.upper()
         guesses.append(choice)
         correct_answer += check_answer(question_answer.get(key),choice)
     display_value(correct_answer, guesses)
@@ -26,15 +26,24 @@ def display_value(correct_answer,guesses):
     print("--------------------")
 
     print("Answer: ", end="")
-    for i in question_answer:
-        print(question_answer.get(i), end="")
-        print()
-    print("Guesses: ",end="")
+    for key in question_answer:
+        print(question_answer[key], end=" ")
+    print()
+
+    print("Guesses: ", end=" ")
     for i in guesses:
-        print(i,end="")
-        print()
+        print(i, end=" ")
+    print()
+    score = int(correct_answer/len(question_answer)*100)
+    print("Your grade: " + str(score) + " %")
 
-
+def play_again():
+    answer_play = input("You want to play again? (no or yes): ")
+    answer_play = answer_play.upper()
+    if answer_play == "YES":
+        return True
+    else:
+        return False
 
 
 
@@ -43,3 +52,6 @@ question_answer = {"Capital of Russia?:": "C", "Capital of Ukraine?:": "D",
 options = ["A. Washington","B. Tokyo","C. Moskow","D. Kiev"]
 
 new_game()
+while play_again():
+    new_game()
+print("Good bye!")
